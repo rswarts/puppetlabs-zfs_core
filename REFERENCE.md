@@ -208,6 +208,8 @@ Default value: present
 ##### `disk`
 
 The disk(s) for this pool. Can be an array or a space separated string.
+Use disk/device names as displayed by "zpool status". On Linux/ZOL, use 
+full device pathes as displayed by "zpool status -P". 
 
 ##### `mirror`
 
