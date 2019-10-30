@@ -76,10 +76,6 @@ module Puppet
       desc 'The nbmand property. Valid values are `on`, `off`.'
     end
 
-    newproperty(:overlay) do
-      desc 'The overlay property. Valid values are `on`, `off`.'
-    end
-
     newproperty(:primarycache) do
       desc 'The primarycache property. Valid values are `all`, `none`, `metadata`.'
     end
