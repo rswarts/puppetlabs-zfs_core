@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.0.3](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.0.3) (2019-10-31)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.0.2...1.0.3)
+
+### Added
+
+- \(MODULES-8823\) Add support for overlay option in zfs on Linux [\#22](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/22) ([GabrielNagy](https://github.com/GabrielNagy))
+- Use "zpool status -P" instead of "zpool status" [\#14](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/14) ([bluthg](https://github.com/bluthg))
+
 ## [1.0.2](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.0.2) (2019-02-12)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.0.1...1.0.2)
