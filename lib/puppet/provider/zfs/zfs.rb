@@ -79,12 +79,17 @@ Puppet::Type.type(:zfs).provide(:zfs) do
     end
   end
 
-  [:aclinherit, :atime, :canmount, :checksum,
-   :compression, :copies, :dedup, :devices, :exec, :logbias,
-   :mountpoint, :nbmand, :overlay, :primarycache, :quota, :readonly,
-   :recordsize, :refquota, :refreservation, :reservation,
-   :secondarycache, :setuid, :sharenfs, :sharesmb,
-   :snapdir, :version, :volsize, :vscan, :xattr].each do |field|
+  zfs_properties = [:aclinherit, :atime, :canmount, :checksum,
+                    :compression, :copies, :dedup, :devices, :exec, :logbias,
+                    :mountpoint, :nbmand, :primarycache, :quota, :readonly,
+                    :recordsize, :refquota, :refreservation, :reservation,
+                    :secondarycache, :setuid, :sharenfs, :sharesmb,
+                    :snapdir, :version, :volsize, :vscan, :xattr]
+
+  # The overlay property is only supported on Linux
+  zfs_properties << :overlay if Facter.value(:kernel) == 'Linux'
+
+  zfs_properties.each do |field|
     define_method(field) do
       zfs(:get, '-H', '-o', 'value', field, @resource[:name]).strip
     end

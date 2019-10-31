@@ -76,8 +76,10 @@ module Puppet
       desc 'The nbmand property. Valid values are `on`, `off`.'
     end
 
-    newproperty(:overlay) do
-      desc 'The overlay property. Valid values are `on`, `off`.'
+    if Facter.value(:kernel) == 'Linux'
+      newproperty(:overlay) do
+        desc 'The overlay property. Valid values are `on`, `off`.'
+      end
     end
 
     newproperty(:primarycache) do
