@@ -44,3 +44,6 @@ spec/spec_helper.rb:
   required:
     - '.rspec'
     - 'appveyor.yml'
+
+Rakefile:
+  changelog_version_tag_pattern: '%s'
