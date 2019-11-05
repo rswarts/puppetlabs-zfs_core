@@ -76,9 +76,11 @@ module Puppet
       desc 'The nbmand property. Valid values are `on`, `off`.'
     end
 
-    if Facter.value(:kernel) == 'Linux'
-      newproperty(:overlay) do
-        desc 'The overlay property. Valid values are `on`, `off`.'
+    newproperty(:overlay) do
+      desc 'The overlay property. Valid values are `on`, `off`.'
+
+      validate do |_value|
+        raise Puppet::Error _('This property is only supported on Linux') unless Facter.value(:kernel) == 'Linux'
       end
     end
 
