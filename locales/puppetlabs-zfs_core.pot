@@ -1,16 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2018 Puppet, Inc.
+# Copyright (C) 2019 Puppet, Inc.
 # This file is distributed under the same license as the puppetlabs-zfs_core package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: puppetlabs-zfs_core 1.0.0-5-g43d6225\n"
-"\n"
+"Project-Id-Version: puppetlabs-zfs_core \n"
 "Report-Msgid-Bugs-To: docs@puppet.com\n"
-"POT-Creation-Date: 2018-08-20 08:41-0700\n"
-"PO-Revision-Date: 2018-08-20 08:41-0700\n"
+"POT-Creation-Date: 2019-11-05 08:19+0000\n"
+"PO-Revision-Date: 2019-11-05 08:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../lib/puppet/type/zfs.rb:83
+msgid "This property is only supported on Linux"
+msgstr ""
 
 #: ../lib/puppet/type/zpool.rb:68
 msgid "mirror names must be provided as string separated, not a comma-separated list"
