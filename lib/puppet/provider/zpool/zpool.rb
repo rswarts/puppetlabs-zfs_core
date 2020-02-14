@@ -37,6 +37,8 @@ Puppet::Type.type(:zpool).provide(:zpool) do
         sym = :spare
       when 'logs'
         sym = :log
+      when 'cache'
+        sym = :cache
       when %r{^mirror|^raidz1|^raidz2}
         sym = (value =~ %r{^mirror}) ? :mirror : :raidz
         pool[:raid_parity] = 'raidz2' if value =~ %r{^raidz2}
@@ -133,7 +135,7 @@ Puppet::Type.type(:zpool).provide(:zpool) do
   end
 
   def create
-    zpool(*([:create] + add_pool_properties + [@resource[:pool]] + build_vdevs + build_named('spare') + build_named('log')))
+    zpool(*([:create] + add_pool_properties + [@resource[:pool]] + build_vdevs + build_named('spare') + build_named('log') + build_named('cache')))
   end
 
   def destroy
@@ -148,7 +150,7 @@ Puppet::Type.type(:zpool).provide(:zpool) do
     end
   end
 
-  [:disk, :mirror, :raidz, :log, :spare].each do |field|
+  [:disk, :mirror, :raidz, :log, :spare, :cache].each do |field|
     define_method(field) do
       current_pool[field]
     end
