@@ -12,6 +12,7 @@ describe Puppet::Type.type(:zfs).provider(:zfs) do
 
   before(:each) do
     allow(provider.class).to receive(:which).with('zfs') { zfs }
+    allow(Facter).to receive(:value).with(:kernel).and_return('Linux')
   end
 
   context '.instances' do
