@@ -11,6 +11,13 @@ Puppet::Type.type(:zpool).provide(:zpool) do
     end
   end
 
+  def get_zpool_property(prop)
+    zpool(:get, prop, @resource[:name]).split("\n").reverse.map { |line|
+      name, _property, value, _source = line.split("\s")
+      value if name == @resource[:name]
+    }.shift
+  end
+
   def process_zpool_data(pool_array)
     if pool_array == []
       return Hash.new(:absent)
@@ -115,8 +122,18 @@ Puppet::Type.type(:zpool).provide(:zpool) do
     end
   end
 
+  def add_pool_properties
+    properties = []
+    [:ashift, :autoexpand, :failmode].each do |property|
+      if (value = @resource[property]) && value != ''
+        properties << '-o' << "#{property}=#{value}"
+      end
+    end
+    properties
+  end
+
   def create
-    zpool(*([:create, @resource[:pool]] + build_vdevs + build_named('spare') + build_named('log')))
+    zpool(*([:create] + add_pool_properties + [@resource[:pool]] + build_vdevs + build_named('spare') + build_named('log')))
   end
 
   def destroy
@@ -139,6 +156,38 @@ Puppet::Type.type(:zpool).provide(:zpool) do
     # rubocop:disable Style/SignalException
     define_method(field.to_s + '=') do |should|
       fail "zpool #{field} can't be changed. should be #{should}, currently is #{current_pool[field]}"
+    end
+  end
+
+  [:autoexpand, :failmode].each do |field|
+    define_method(field) do
+      get_zpool_property(field)
+    end
+
+    define_method(field.to_s + '=') do |should|
+      zpool(:set, "#{field}=#{should}", @resource[:name])
+    end
+  end
+
+  # Borrow the code from the ZFS provider here so that we catch and return '-'
+  # as ashift is linux only.
+  # see lib/puppet/provider/zfs/zfs.rb
+
+  PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze
+
+  define_method(:ashift) do
+    begin
+      get_zpool_property(:ashift)
+    rescue
+      PARAMETER_UNSET_OR_NOT_AVAILABLE
+    end
+  end
+
+  define_method('ashift=') do |should|
+    begin
+      zpool(:set, "ashift=#{should}", @resource[:name])
+    rescue
+      PARAMETER_UNSET_OR_NOT_AVAILABLE
     end
   end
 end
