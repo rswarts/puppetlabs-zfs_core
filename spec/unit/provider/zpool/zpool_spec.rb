@@ -158,6 +158,42 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
     end
   end
 
+  describe 'when calling the getters and setters for configurable options' do
+    [:autoexpand, :failmode].each do |field|
+      it "should get the #{field} value from the pool" do
+        allow(provider).to receive(:zpool).with(:get, field, name).and_return("NAME PROPERTY VALUE SOURCE\n#{name} #{field} value local")
+        expect(provider.send(field)).to eq('value')
+      end
+      it "should set #{field}=value" do
+        expect(provider).to receive(:zpool).with(:set, "#{field}=value", name)
+        provider.send("#{field}=", 'value')
+      end
+    end
+  end
+  describe 'when calling the getters and setters for ashift' do
+    context 'when available' do
+      it "gets 'ashift' property" do
+        expect(provider).to receive(:zpool).with(:get, :ashift, name).and_return("NAME PROPERTY VALUE SOURCE\n#{name} ashift value local")
+        expect(provider.send('ashift')).to eq('value')
+      end
+      it 'sets ashift=value' do
+        expect(provider).to receive(:zpool).with(:set, 'ashift=value', name)
+        provider.send('ashift=', 'value')
+      end
+    end
+
+    context 'when not available' do
+      it "gets '-' for the ashift property" do
+        expect(provider).to receive(:zpool).with(:get, :ashift, name).and_raise(RuntimeError, 'not valid')
+        expect(provider.send('ashift')).to eq('-')
+      end
+      it 'does not error out when trying to set ashift' do
+        expect(provider).to receive(:zpool).with(:set, 'ashift=value', name).and_raise(RuntimeError, 'not valid')
+        expect { provider.send('ashift=', 'value') }.not_to raise_error
+      end
+    end
+  end
+
   describe 'when calling the getters and setters' do
     [:disk, :mirror, :raidz, :log, :spare].each do |field|
       describe "when calling #{field}" do
@@ -232,6 +268,19 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
         resource[:raidz] = ['disk1 disk2', 'disk3 disk4']
         expect(provider).to receive(:zpool).with(:create, name, 'raidz1', 'disk1', 'disk2', 'raidz1', 'disk3', 'disk4')
         provider.create
+      end
+    end
+
+    describe 'when creating a zpool with options' do
+      before(:each) do
+        resource[:disk] = 'disk1'
+      end
+      [:ashift, :autoexpand, :failmode].each do |field|
+        it "should include field #{field}" do
+          resource[field] = field
+          expect(provider).to receive(:zpool).with(:create, '-o', "#{field}=#{field}", name, 'disk1')
+          provider.create
+        end
       end
     end
   end
