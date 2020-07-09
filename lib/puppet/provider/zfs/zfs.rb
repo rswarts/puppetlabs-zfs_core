@@ -50,7 +50,7 @@ Puppet::Type.type(:zfs).provide(:zfs) do
     end
   end
 
-  PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze
+  PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze unless defined? PARAMETER_UNSET_OR_NOT_AVAILABLE
 
   # https://docs.oracle.com/cd/E19963-01/html/821-1448/gbscy.html
   # shareiscsi (added in build 120) was removed from S11 build 136
