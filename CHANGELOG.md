@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.1.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.1.0) (2020-07-09)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.0.5...1.1.0)
+
+### Added
+
+- \(MODULES-10726\) Add support for ashift/autoexpand/failmode to the zpool provider. [\#30](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/30) ([KeithWard](https://github.com/KeithWard))
+
 ## [1.0.5](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.0.5) (2020-04-01)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.0.4...1.0.5)
