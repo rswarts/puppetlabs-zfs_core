@@ -92,8 +92,22 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
 
     describe 'when there are two logs' do
       it 'adds the log disks to the hash as a single string' do
-        zpool_data.concat ['spares', 'spare_disk', 'spare_disk2']
-        expect(provider.process_zpool_data(zpool_data)[:spare]).to eq(['spare_disk spare_disk2'])
+        zpool_data.concat ['logs', 'log_disk', 'log_disk2']
+        expect(provider.process_zpool_data(zpool_data)[:log]).to eq(['log_disk log_disk2'])
+      end
+    end
+
+    describe 'when there is a cache' do
+      it 'adds the cache disk to the hash' do
+        zpool_data.concat ['cache', 'cache_disk']
+        expect(provider.process_zpool_data(zpool_data)[:cache]).to eq(['cache_disk'])
+      end
+    end
+
+    describe 'when there are two caches' do
+      it 'adds the cache disks to the hash as a single string' do
+        zpool_data.concat ['cache', 'cache_disk', 'cache_disk2']
+        expect(provider.process_zpool_data(zpool_data)[:cache]).to eq(['cache_disk cache_disk2'])
       end
     end
 
@@ -195,7 +209,7 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
   end
 
   describe 'when calling the getters and setters' do
-    [:disk, :mirror, :raidz, :log, :spare].each do |field|
+    [:disk, :mirror, :raidz, :log, :spare, :cache].each do |field|
       describe "when calling #{field}" do
         it "should get the #{field} value from the current_pool hash" do
           pool_hash = {}
@@ -231,7 +245,8 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
       it "calls create with the 'spares' and 'log' values" do
         resource[:spare] = ['value1']
         resource[:log] = ['value2']
-        expect(provider).to receive(:zpool).with(:create, name, 'disk1', 'spare', 'value1', 'log', 'value2')
+        resource[:cache] = ['value3']
+        expect(provider).to receive(:zpool).with(:create, name, 'disk1', 'spare', 'value1', 'log', 'value2', 'cache', 'value3')
         provider.create
       end
     end

@@ -41,7 +41,7 @@ module Puppet
     desc <<-DESC
   Manage zpools. Create and delete zpools. The provider WILL NOT SYNC, only report differences.
 
-  Supports vdevs with mirrors, raidz, logs and spares.
+  Supports vdevs with mirrors, raidz, logs, spares, and cache.
 
   @example Using zpool.
     zpool { 'tstpool':
@@ -88,6 +88,10 @@ module Puppet
 
     newproperty(:log, array_matching: :all, parent: Puppet::Property::VDev) do
       desc 'Log disks for this pool. This type does not currently support mirroring of log disks.'
+    end
+
+    newproperty(:cache, array_matching: :all, parent: Puppet::Property::VDev) do
+      desc 'Cache disks for this pool.'
     end
 
     newproperty(:ashift) do
