@@ -175,7 +175,7 @@ Puppet::Type.type(:zpool).provide(:zpool) do
   # as ashift is linux only.
   # see lib/puppet/provider/zfs/zfs.rb
 
-  PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze
+  PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze unless defined? PARAMETER_UNSET_OR_NOT_AVAILABLE
 
   define_method(:ashift) do
     begin
