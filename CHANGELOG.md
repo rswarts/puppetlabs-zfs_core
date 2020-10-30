@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.2.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.2.0) (2020-10-30)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.1.0...1.2.0)
+
+### Added
+
+- \(Modules-7207\) Add 'caches' support [\#38](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/38) ([kBite](https://github.com/kBite))
+
+### Fixed
+
+- \(MODULES-10848\) Do not redefine PARAMETER\_UNSET\_OR\_NOT\_AVAILABLE [\#39](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/39) ([beechtom](https://github.com/beechtom))
+
 ## [1.1.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.1.0) (2020-07-09)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.0.5...1.1.0)
