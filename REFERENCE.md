@@ -146,6 +146,10 @@ The sharesmb property. Valid values are `on`, `off`, sharemgr(1M) options
 
 The snapdir property. Valid values are `hidden`, `visible`.
 
+##### `sync`
+
+The sync property. Valid values are `standard`, `always`, `disabled`.
+
 ##### `version`
 
 The version property. Valid values are `1`, `2`, `3`, `4`, `current`.
