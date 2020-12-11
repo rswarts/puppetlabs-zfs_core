@@ -136,6 +136,10 @@ module Puppet
       desc 'The snapdir property. Valid values are `hidden`, `visible`.'
     end
 
+    newproperty(:sync) do
+      desc 'The sync property. Valid values are `standard`, `always`, `disabled`.'
+    end
+
     newproperty(:version) do
       desc 'The version property. Valid values are `1`, `2`, `3`, `4`, `current`.'
     end

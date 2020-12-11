@@ -84,7 +84,7 @@ Puppet::Type.type(:zfs).provide(:zfs) do
    :mountpoint, :nbmand, :primarycache, :quota, :readonly,
    :recordsize, :refquota, :refreservation, :reservation,
    :secondarycache, :setuid, :sharenfs, :sharesmb,
-   :snapdir, :version, :volsize, :vscan, :xattr].each do |field|
+   :snapdir, :sync, :version, :volsize, :vscan, :xattr].each do |field|
     define_method(field) do
       zfs(:get, '-H', '-o', 'value', field, @resource[:name]).strip
     end
