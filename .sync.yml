@@ -1,20 +1,17 @@
 ---
+.rubocop.yml:
+  default_configs:
+    RSpec/InstanceVariable:
+      Enabled: false
 Gemfile:
-  required:
-    ':system_tests':
-      - gem: 'puppet-module-posix-system-r#{minor_version}'
-        platforms: ruby
-      - gem: 'puppet-module-win-system-r#{minor_version}'
-        platforms:
-          - mswin
-          - mingw
-          - x64_mingw
+  optional:
+    ":development":
       - gem: beaker
-        version: '~> 3.34'
+        version: '~> 4.30'
         from_env: BEAKER_VERSION
       - gem: beaker-abs
         from_env: BEAKER_ABS_VERSION
-        version: '~> 0.5'
+        version: '~> 0.9'
       - gem: beaker-pe
       - gem: beaker-hostgenerator
         from_env: BEAKER_HOSTGENERATOR_VERSION
@@ -22,28 +19,19 @@ Gemfile:
         from_env: BEAKER_RSPEC_VERSION
       - gem: beaker-puppet
         from_env: BEAKER_PUPPET_VERSION
-        version: '~> 0.15'
-    ':development':
-      - gem: puppet-strings
-  optional:
-    ':development':
-      - gem: 'github_changelog_generator'
-        git: 'https://github.com/skywinder/github-changelog-generator'
-        ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
-        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.2.2')"
+        version: '~> 1.22'
+      - gem: github_changelog_generator
+      - gem: beaker-module_install_helper
+      - gem: beaker-puppet_install_helper
+      - gem: nokogiri
 
-spec/spec_helper.rb:
-  mock_with: ':rspec'
-
-.rubocop.yml:
-  default_configs:
-    RSpec/InstanceVariable:
-      Enabled: false
-
-.gitignore:
-  required:
-    - '.rspec'
-    - 'appveyor.yml'
-
-Rakefile:
-  changelog_version_tag_pattern: '%s'
+appveyor.yml:
+  delete: true
+.travis.yml:
+  delete: true
+.github/workflows/auto_release.yml:
+  unmanaged: false
+.github/workflows/release.yml:
+  unmanaged: false
+.gitlab-ci.yml:
+  delete: true
