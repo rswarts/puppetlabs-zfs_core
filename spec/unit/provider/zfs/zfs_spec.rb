@@ -50,7 +50,7 @@ describe Puppet::Type.type(:zfs).provider(:zfs) do
 
     Puppet::Type.type(:zfs).validproperties.each do |prop|
       next if [:ensure, :volsize].include?(prop)
-      it "should include property #{prop}" do
+      it "includes property #{prop}" do
         resource[prop] = prop
 
         expect(provider).to receive(:zfs).with(:create, '-o', "#{prop}=#{prop}", name)
@@ -96,13 +96,13 @@ describe Puppet::Type.type(:zfs).provider(:zfs) do
      :recordsize, :refquota, :refreservation, :reservation,
      :secondarycache, :setuid, :shareiscsi, :sharenfs, :sharesmb,
      :snapdir, :version, :volsize, :vscan, :xattr].each do |prop|
-      it "should get #{prop}" do
+      it "gets #{prop}" do
         expect(provider).to receive(:zfs).with(:get, '-H', '-o', 'value', prop, name).and_return("value\n")
 
         expect(provider.send(prop)).to eq('value')
       end
 
-      it "should set #{prop}=value" do
+      it "sets #{prop}=value" do
         expect(provider).to receive(:zfs).with(:set, "#{prop}=value", name)
 
         provider.send("#{prop}=", 'value')

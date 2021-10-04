@@ -4,14 +4,14 @@ describe 'zpool' do
   describe Puppet::Type.type(:zpool) do
     properties = [:ensure, :disk, :mirror, :raidz, :spare, :log, :autoexpand, :failmode, :ashift, :cache]
     properties.each do |property|
-      it "should have a #{property} property" do
+      it "has a #{property} property" do
         expect(described_class.attrclass(property).ancestors).to be_include(Puppet::Property)
       end
     end
 
     parameters = [:pool, :raid_parity]
     parameters.each do |parameter|
-      it "should have a #{parameter} parameter" do
+      it "has a #{parameter} parameter" do
         expect(described_class.attrclass(parameter).ancestors).to be_include(Puppet::Parameter)
       end
     end

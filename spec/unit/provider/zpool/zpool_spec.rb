@@ -174,11 +174,11 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
 
   describe 'when calling the getters and setters for configurable options' do
     [:autoexpand, :failmode].each do |field|
-      it "should get the #{field} value from the pool" do
+      it "gets the #{field} value from the pool" do
         allow(provider).to receive(:zpool).with(:get, field, name).and_return("NAME PROPERTY VALUE SOURCE\n#{name} #{field} value local")
         expect(provider.send(field)).to eq('value')
       end
-      it "should set #{field}=value" do
+      it "sets #{field}=value" do
         expect(provider).to receive(:zpool).with(:set, "#{field}=value", name)
         provider.send("#{field}=", 'value')
       end
@@ -211,7 +211,7 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
   describe 'when calling the getters and setters' do
     [:disk, :mirror, :raidz, :log, :spare, :cache].each do |field|
       describe "when calling #{field}" do
-        it "should get the #{field} value from the current_pool hash" do
+        it "gets the #{field} value from the current_pool hash" do
           pool_hash = {}
           pool_hash[field] = 'value'
           allow(provider).to receive(:current_pool) { pool_hash }
@@ -221,7 +221,7 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
       end
 
       describe "when setting the #{field}" do
-        it "should fail if readonly #{field} values change" do
+        it "fails if readonly #{field} values change" do
           allow(provider).to receive(:current_pool) { Hash.new('currentvalue') }
           expect {
             provider.send((field.to_s + '=').to_sym, 'shouldvalue')
@@ -291,7 +291,7 @@ describe Puppet::Type.type(:zpool).provider(:zpool) do
         resource[:disk] = 'disk1'
       end
       [:ashift, :autoexpand, :failmode].each do |field|
-        it "should include field #{field}" do
+        it "includes field #{field}" do
           resource[field] = field
           expect(provider).to receive(:zpool).with(:create, '-o', "#{field}=#{field}", name, 'disk1')
           provider.create

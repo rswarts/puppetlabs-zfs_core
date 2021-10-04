@@ -39,14 +39,14 @@ module Puppet
 
   Type.newtype(:zpool) do
     desc <<-DESC
-  Manage zpools. Create and delete zpools. The provider WILL NOT SYNC, only report differences.
+  @summary Manage zpools. Create and delete zpools. The provider WILL NOT SYNC, only report differences.
 
   Supports vdevs with mirrors, raidz, logs, spares, and cache.
 
   @example Using zpool.
     zpool { 'tstpool':
       ensure => present,
-      disk => '/ztstpool/dsk',
+      disk   => '/ztstpool/dsk',
     }
   DESC
 

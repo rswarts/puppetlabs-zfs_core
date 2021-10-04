@@ -2,7 +2,7 @@
 module Puppet
   Type.newtype(:zfs) do
     desc <<-DESC
-  Manage zfs. Create destroy and set properties on zfs instances.
+  @summary Manage zfs. Create destroy and set properties on zfs instances.
 
   **Autorequires:** If Puppet is managing the zpool at the root of this zfs
   instance, the zfs resource will autorequire it. If Puppet is managing any

@@ -4,7 +4,7 @@ describe Puppet::Type.type(:zfs) do
   properties = [:ensure, :mountpoint, :compression, :copies, :overlay, :quota, :reservation, :sharenfs, :snapdir, :sync]
 
   properties.each do |property|
-    it "should have a #{property} property" do
+    it "has a #{property} property" do
       expect(described_class.attrclass(property).ancestors).to be_include(Puppet::Property)
     end
   end
@@ -12,7 +12,7 @@ describe Puppet::Type.type(:zfs) do
   parameters = [:name]
 
   parameters.each do |parameter|
-    it "should have a #{parameter} parameter" do
+    it "has a #{parameter} parameter" do
       expect(described_class.attrclass(parameter).ancestors).to be_include(Puppet::Parameter)
     end
   end

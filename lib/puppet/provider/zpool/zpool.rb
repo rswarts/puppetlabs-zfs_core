@@ -41,7 +41,7 @@ Puppet::Type.type(:zpool).provide(:zpool) do
         sym = :cache
       when %r{^mirror|^raidz1|^raidz2}
         sym = (value =~ %r{^mirror}) ? :mirror : :raidz
-        pool[:raid_parity] = 'raidz2' if value =~ %r{^raidz2}
+        pool[:raid_parity] = 'raidz2' if %r{^raidz2}.match?(value)
       else
         # get full drive name if the value is a partition (Linux only)
         tmp << if Facter.value(:kernel) == 'Linux' && value =~ %r{/dev/(:?[a-z]+1|disk/by-id/.+-part1)$}
@@ -61,8 +61,6 @@ Puppet::Type.type(:zpool).provide(:zpool) do
     pool
   end
 
-  # rubocop:disable Style/AccessorMethodName
-  # rubocop:disable Style/NumericPredicate
   def get_pool_data
     # https://docs.oracle.com/cd/E19082-01/817-2271/gbcve/index.html
     # we could also use zpool iostat -v mypool for a (little bit) cleaner output
