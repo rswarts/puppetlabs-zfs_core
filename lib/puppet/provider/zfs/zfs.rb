@@ -64,18 +64,14 @@ Puppet::Type.type(:zfs).provide(:zfs) do
     # properties are attempted to be unset, and resulted in an error, our
     # best bet is to catch the exception and continue.
     define_method(field) do
-      begin
-        zfs(:get, '-H', '-o', 'value', field, @resource[:name]).strip
-      rescue
-        PARAMETER_UNSET_OR_NOT_AVAILABLE
-      end
+      zfs(:get, '-H', '-o', 'value', field, @resource[:name]).strip
+    rescue
+      PARAMETER_UNSET_OR_NOT_AVAILABLE
     end
     define_method(field.to_s + '=') do |should|
-      begin
-        zfs(:set, "#{field}=#{should}", @resource[:name])
-      rescue
-        PARAMETER_UNSET_OR_NOT_AVAILABLE
-      end
+      zfs(:set, "#{field}=#{should}", @resource[:name])
+    rescue
+      PARAMETER_UNSET_OR_NOT_AVAILABLE
     end
   end
 

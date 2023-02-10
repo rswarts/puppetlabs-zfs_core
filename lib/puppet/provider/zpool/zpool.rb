@@ -176,18 +176,14 @@ Puppet::Type.type(:zpool).provide(:zpool) do
   PARAMETER_UNSET_OR_NOT_AVAILABLE = '-'.freeze unless defined? PARAMETER_UNSET_OR_NOT_AVAILABLE
 
   define_method(:ashift) do
-    begin
-      get_zpool_property(:ashift)
-    rescue
-      PARAMETER_UNSET_OR_NOT_AVAILABLE
-    end
+    get_zpool_property(:ashift)
+  rescue
+    PARAMETER_UNSET_OR_NOT_AVAILABLE
   end
 
   define_method('ashift=') do |should|
-    begin
-      zpool(:set, "ashift=#{should}", @resource[:name])
-    rescue
-      PARAMETER_UNSET_OR_NOT_AVAILABLE
-    end
+    zpool(:set, "ashift=#{should}", @resource[:name])
+  rescue
+    PARAMETER_UNSET_OR_NOT_AVAILABLE
   end
 end
