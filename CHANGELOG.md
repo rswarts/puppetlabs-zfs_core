@@ -2,13 +2,21 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v1.4.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/v1.4.0) (2023-02-14)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/v1.3.0...v1.4.0)
+
+### Added
+
+- \(PA-4806\) Updates PDK template [\#56](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/56) ([mhashizume](https://github.com/mhashizume))
+
 ## [v1.3.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/v1.3.0) (2021-10-04)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-zfs_core/compare/1.2.0...v1.3.0)
 
 ### Added
 
-- \(MODULES-10874\) Add property 'sync' [\#43](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/43) ([iamjamestl](https://github.com/iamjamestl))
+- \(MODULES-10874\) Add property 'sync' [\#43](https://github.com/puppetlabs/puppetlabs-zfs_core/pull/43) ([jameslikeslinux](https://github.com/jameslikeslinux))
 
 ## [1.2.0](https://github.com/puppetlabs/puppetlabs-zfs_core/tree/1.2.0) (2020-10-30)
 
