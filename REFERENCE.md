@@ -179,16 +179,16 @@ The zoned property. Valid values are `on`, `off`.
 
 The following parameters are available in the `zfs` type.
 
-* [`name`](#name)
-* [`provider`](#provider)
+* [`name`](#-zfs--name)
+* [`provider`](#-zfs--provider)
 
-##### <a name="name"></a>`name`
+##### <a name="-zfs--name"></a>`name`
 
 namevar
 
 The full name for this filesystem (including the zpool).
 
-##### <a name="provider"></a>`provider`
+##### <a name="-zfs--provider"></a>`provider`
 
 The specific backend to use for this `zfs` resource. You will seldom need to specify this --- Puppet will usually
 discover the appropriate provider for your platform.
@@ -266,22 +266,22 @@ Spare disk(s) for this pool.
 
 The following parameters are available in the `zpool` type.
 
-* [`pool`](#pool)
-* [`provider`](#provider)
-* [`raid_parity`](#raid_parity)
+* [`pool`](#-zpool--pool)
+* [`provider`](#-zpool--provider)
+* [`raid_parity`](#-zpool--raid_parity)
 
-##### <a name="pool"></a>`pool`
+##### <a name="-zpool--pool"></a>`pool`
 
 namevar
 
 The name for this pool.
 
-##### <a name="provider"></a>`provider`
+##### <a name="-zpool--provider"></a>`provider`
 
 The specific backend to use for this `zpool` resource. You will seldom need to specify this --- Puppet will usually
 discover the appropriate provider for your platform.
 
-##### <a name="raid_parity"></a>`raid_parity`
+##### <a name="-zpool--raid_parity"></a>`raid_parity`
 
 Determines parity when using the `raidz` parameter.
 
