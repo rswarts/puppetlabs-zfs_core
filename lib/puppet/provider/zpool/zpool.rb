@@ -44,7 +44,7 @@ Puppet::Type.type(:zpool).provide(:zpool) do
         pool[:raid_parity] = 'raidz2' if %r{^raidz2}.match?(value)
       else
         # get full drive name if the value is a partition (Linux only)
-        tmp << if Facter.value(:kernel) == 'Linux' && value =~ %r{/dev/(:?[a-z]+1|disk/by-id/.+-part1)$}
+        tmp << if Facter.value(:kernel) == 'Linux' && value =~ %r{/dev/(:?[a-z]+([0-9]+n[0-9]+p)?1|disk/by-id/.+-part1)$}
                  execute("lsblk -p -no pkname #{value}").chomp
                else
                  value
